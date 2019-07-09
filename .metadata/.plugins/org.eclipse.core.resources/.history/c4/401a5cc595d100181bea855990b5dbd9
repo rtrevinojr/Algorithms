@@ -1,0 +1,28 @@
+package sorting;
+
+import java.util.Random;
+
+public class RandomPartition {
+
+	
+	
+	public static int [] randomPartition (int [] arr) {
+		
+		return new int [0];
+	}
+	
+	
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("RandomPartition.java");
+		
+		Random rn = new Random();
+		int answer = rn.nextInt(10);
+	
+		System.out.println("random int = " + answer);
+		
+		
+	}
+}

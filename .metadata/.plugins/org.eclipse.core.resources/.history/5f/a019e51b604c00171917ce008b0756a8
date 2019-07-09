@@ -1,0 +1,123 @@
+package fb;
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public class Graph {
+        
+        private int V;
+        private int E;
+        private Map <Integer, List <Integer>> adjacencyList;
+        
+        public Graph(int v) {
+                this.V = v;
+                adjacencyList = new HashMap <Integer, List <Integer>> ();
+            
+            
+            
+                for (int node = 0; node < v; node++) {
+                    adjacencyList.put(node, new LinkedList <Integer> ());
+                }
+        }
+        
+        public void addEdge(int u, int v) throws Exception {
+            if (!validVertex(u))
+                throw new Exception("Vertex " + u + " is not a valid vertex");
+            this.E++;
+            List <Integer> result = adjacencyList.get(u);
+            result.add(new Integer(v));
+            adjacencyList.put(new Integer(u), result);
+        }
+        
+        public boolean validVertex (int v) {
+            if (v >= V || v < 0)
+                return false;
+            return true;
+        }
+        
+        public List <Integer> getChildren (int v) {
+            if (validVertex(v))
+                return adjacencyList.get(v);
+            else 
+                return null;
+        }
+        
+        public int getShortestPath (int u, int v) {
+               return 0;
+        }
+    
+        public int dfs (int u, int v, int count) {
+            
+            int size = getChildren(u).size();
+            if (size == 0)
+                return 0;
+            else if (u == v)
+                return count;
+            else {
+                for (int i = 0; i < getChildren(u).size(); i++) {
+                    int x = getChildren(u).get(i);
+                    dfs(new Integer(x), new Integer(v), count + 1);
+                }
+                return 0;
+            } 
+        
+        }
+        /*
+        public int dfs2 (int u, int v) {
+            
+            int size = getChildren(u).size();
+            if (size == 0)
+                return 0;
+            else if (u == v)
+                return 1;
+        }
+        */   
+        
+    }
+    
+    public static int computeShortestPath (Graph G) {
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    	try {
+        Scanner scan = new Scanner(new File("tinyGraph.txt"));
+        int q = scan.nextInt();
+        Solution sol = new Solution();
+        for (int i = 0; i < q; i++) {
+            int n = scan.nextInt();
+            int m = scan.nextInt();
+            
+            
+            Graph graph = sol.new Graph(n);
+            for (int e = 0; e < m; e++) {
+                int u = scan.nextInt();
+                int v = scan.nextInt();
+                
+                try {
+                    graph.addEdge(u, v);
+                }
+                catch(Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            int s = scan.nextInt();
+            int result = graph.dfs(s, 3, 0);
+            System.out.println("Result = " + result);
+        }
+    	}
+    	catch (Exception ex) {
+    		ex.printStackTrace();
+    	}
+        
+        
+      
+        
+    }
+}
+    

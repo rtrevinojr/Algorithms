@@ -1,0 +1,104 @@
+package Microsoft;
+
+public class BST {
+	
+	
+	public BSTNode root;
+	
+	public class BSTNode {
+		
+		public int data;
+		public BSTNode left;
+		public BSTNode right;
+		
+		public BSTNode (int data) {
+			this.data = data;
+		}
+	}
+	
+	
+	public BSTNode addNode (int data) {
+		
+		return addNodeHelper (data, root);
+	}
+	
+	public BSTNode addNodeHelper (int data, BSTNode node) {
+		
+		if (node == null) {
+			return new BSTNode (data);
+		}
+		if (data > node.data) {
+			node.right = addNodeHelper (data, node.right);
+		}
+		if (data < node.data) {
+			node.left = addNodeHelper (data, node.left);
+		}
+//		if (data == node.data) {
+//			node.data = data;
+//		}
+		return node;
+	}
+	
+	public String serialize () {
+		
+		StringBuilder sb = new StringBuilder ();
+		
+		return dfs (root, sb);
+	}
+	
+	public String serializeHelper (BSTNode node, StringBuilder sb) {
+		
+		
+		if (node == null) {
+			sb.append("null,");
+		}
+		else if (node.left != null && node.right != null) {
+			sb.append(node.left.data + "," + node.right.data);
+		}
+		else if (node.left != null) {
+			sb.append(node.data + ",");
+		}
+		else if (node.right != null) {
+			sb.append(node.data + ",");
+		}
+		else if (node.left == null && node.right == null) {
+			sb.append("null,null,");
+		}
+		
+		return sb.toString();
+	}
+	
+	public String dfs (BSTNode node, StringBuilder sb) {
+		
+		if (node == null) {
+			sb.append("null,");
+		}
+		else {
+			sb.append(node.data + ",");
+		}
+		dfs (node.left, sb);
+		dfs (node.right, sb);
+		
+		return sb.toString();
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("BST.java");
+		
+		BST bst = new BST ();
+		bst.addNode(5);
+		bst.addNode (1);
+		bst.addNode (0);
+		bst.addNode(3);
+		bst.addNode(4);
+		bst.addNode(8);
+		bst.addNode(7);
+		bst.addNode(9);
+		
+		System.out.println(bst.serialize());
+		
+	}
+
+}

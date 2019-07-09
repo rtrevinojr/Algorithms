@@ -1,0 +1,77 @@
+package topcoder;
+
+import java.util.HashMap;
+
+public class Telephone {
+	
+	
+	public static HashMap <Integer, String> phone;
+	
+	
+	public Telephone () {
+		phone = new HashMap <Integer, String> ();
+		phone.put(0, "");
+		phone.put(1, "");
+		phone.put(2, "ABC");
+		phone.put(3, "DEF");
+		phone.put(4, "GHI");
+		phone.put(5, "JKL");
+		phone.put(6, "MNO");
+		phone.put(7, "PQRS");
+		phone.put(8, "TUV");
+		phone.put(9, "WXYZ");
+		
+		
+	}
+	
+	public void combos (int num) {
+		
+		combosHelper (num, "");
+	}
+	
+	public void combosHelper (int num, String word) {
+		
+		if (num <= 0) {
+			System.out.println(word);
+			return;
+		}
+		
+		
+		int digit = 0;
+		
+		//while (num > 0) {
+			
+			digit = num / 10;
+			System.out.println("digit = " + digit);
+			num /= 10;
+			
+			String letters = phone.get(digit);
+			if (letters != null) { 
+				
+			
+				for (int i = 0; i < letters.length(); i++) {
+					char ch = letters.charAt(i);
+					combosHelper (num, word + String.valueOf(ch));
+				}
+			}
+		//}
+	}
+	
+	
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("Telephone.java");
+		
+		Telephone tele = new Telephone();
+		
+		int x = 234;
+		
+		
+		tele.combos(x);
+		
+		System.out.println("end...");
+	}
+
+}

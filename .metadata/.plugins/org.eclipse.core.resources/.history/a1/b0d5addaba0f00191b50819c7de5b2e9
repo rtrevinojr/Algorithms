@@ -1,0 +1,143 @@
+package Microsoft;
+
+public class BST {
+	
+	
+	public BSTNode root;
+	
+	public class BSTNode {
+		
+		public int data;
+		public BSTNode left;
+		public BSTNode right;
+		
+		public BSTNode (int data) {
+			this.data = data;
+		}
+	}
+	
+	
+	public BSTNode addNode (int data) {
+		
+		if (root == null) {
+			root = new BSTNode (data);
+			return root;
+		}
+		
+		return addNodeHelper (data, root);
+	}
+	
+	public BSTNode addNodeHelper (int data, BSTNode node) {
+		
+		if (node == null) {
+			return new BSTNode (data);
+		}
+		if (data > node.data) {
+			node.right = addNodeHelper (data, node.right);
+		}
+		if (data < node.data) {
+			node.left = addNodeHelper (data, node.left);
+		}
+//		if (data == node.data) {
+//			node.data = data;
+//		}
+		return node;
+	}
+	
+	
+	public BSTNode deserialize (String serial) {
+		
+		String [] nodesValues = serial.split(",");
+		
+		return deserializeHelper (nodesValues, 0, root);
+	}
+	
+	public BSTNode deserializeHelper (String [] nodeValues, int index, BSTNode node) {
+		
+		if (index >= nodeValues.length) {
+			return null;
+		}
+		String nodeVal = nodeValues[index];
+		if (nodeVal.equals("null")) {
+			//return null;
+			
+		}
+		if (!nodeVal.equals("null")) {
+		BSTNode n = new BSTNode(Integer.parseInt(nodeValues[index]));
+	
+		n.left = deserializeHelper (nodeValues, index + 1, node);
+		n.right = deserializeHelper (nodeValues, index + 1, node);
+		return n;
+		}
+		else {
+			return null;
+		}
+		//return n;
+		
+	}
+	
+	public String serialize () {
+		
+		StringBuilder sb = new StringBuilder ();
+		return dfs (root, sb);
+	}
+	
+	public String dfs (BSTNode node, StringBuilder sb) {
+		
+		if (node == null) {
+			sb.append("null,");
+		}
+		else {
+			sb.append(node.data + ",");
+			dfs (node.left, sb);
+			dfs (node.right, sb);
+		}
+	
+		return sb.toString();
+	}
+	
+	public void preOrder () {
+		preOrder (root);
+		System.out.println();
+	}
+	
+	public void preOrder (BSTNode node) {
+		
+		if (node != null) {
+		System.out.print(node.data + " ");
+		preOrder (node.left);
+		preOrder (node.right);
+		}
+		
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("BST.java");
+		
+		BST bst = new BST ();
+		bst.addNode(5);
+		bst.addNode (1);
+		bst.addNode (-2);
+		bst.addNode(3);
+		bst.addNode(4);
+		bst.addNode(8);
+		bst.addNode(7);
+		bst.addNode(9);
+		
+		
+		String serial = bst.serialize();
+		
+		System.out.println(serial);
+		
+		BSTNode result = bst.deserialize(serial);
+		
+		System.out.println(result.data);
+		
+		bst.preOrder(result);
+			
+		
+	}
+
+}

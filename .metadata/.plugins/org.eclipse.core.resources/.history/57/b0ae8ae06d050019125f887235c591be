@@ -1,0 +1,88 @@
+package sorting;
+
+public class MergeSortLL {
+	
+	
+	
+	public static class Node {
+		
+		public int data;
+		public Node next;
+		
+		Node (int data) {
+			this.data = data;
+		}
+	}
+	
+	public Node sort (Node head) {
+		
+		if (head == null || head.next == null) {
+			return head;
+		}
+		
+		Node mid = getMidNode (head);
+		
+	}
+	
+	public Node getMidNode (Node head) {
+		
+		if (head == null || head.next == null) {
+			return head;
+		}
+		
+		Node trailer = head;
+		Node leader = head.next;
+		
+		while (leader != null && leader.next != null) {
+			
+			leader = leader.next.next;
+			trailer = trailer.next;
+		}
+		
+		return trailer;
+		
+	}
+	
+	
+	
+	
+	
+	public static Node initLL (int [] arr) {
+		return initLLHelper (arr, 0);
+	}
+	
+	public static Node initLLHelper (int [] arr, int len) {	
+		if (len == arr.length) return null;
+		Node result = new Node (arr[len]);
+		result.next = initLLHelper (arr, ++len);
+		return result;
+	}
+	
+	public static void printLL (Node head) {
+		
+		while (head != null) {
+			System.out.print(head.data);
+			head = head.next;
+		}
+		System.out.println();
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("LinkedList MergeSort");
+		
+		int [] arr = {0, 1, 2, 3, 4, 5, 6};
+		
+		Node head = initLL(arr);
+		printLL(head);
+		
+		MergeSortLL mergeSort = new MergeSortLL();
+		
+		Node mid = mergeSort.getMidNode(head);
+		
+		printLL(mid);
+		
+	}
+
+}

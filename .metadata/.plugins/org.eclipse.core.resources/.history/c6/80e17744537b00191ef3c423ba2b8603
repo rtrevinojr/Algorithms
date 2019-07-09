@@ -1,0 +1,43 @@
+package topcoder;
+
+import java.util.HashSet;
+
+public class TopCoder {
+	
+	
+	public boolean pairSum (int [] arr, int sum) {
+		
+		HashSet<Integer> set = new HashSet<>();
+		for (int i: arr) {
+			if (i == sum) {
+				return true;
+			}
+			if (set.contains(sum - i)) {
+				return true;
+			}
+			if (!set.contains(i)) {
+				set.add(i);
+			}
+			
+		}
+		
+		return false;
+	}
+
+	
+	public static void main (String [] args) {
+		
+		System.out.println("Topcoder.java");
+		
+		int [] test = {1, 2, 3, 4, 5, 6};
+		
+		TopCoder tc = new TopCoder();
+		
+		boolean result = tc.pairSum(test, 30);
+		
+		
+		System.out.println("Test result = " + result);
+		
+		
+	}
+}

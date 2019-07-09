@@ -1,0 +1,63 @@
+package google;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class LongestIncrease {
+	
+	
+	public Node root;
+
+	
+	public static class Node {
+		
+		public Integer value;
+		public List <Node> children;
+		
+		public Node (int val) {
+			value = val;
+			children = new LinkedList <>();
+		}
+		
+		public void addChild (Node n) {
+			children.add(n);
+		}
+		
+		
+	}
+
+
+	
+	public static void main (String [] args) {
+		
+		System.out.println("LongestIncrease.java");
+		
+		
+		Node n41 = new Node (16);
+		Node n42 = new Node (14);
+		
+		Node n31 = new Node (13);
+		n31.addChild(n41);
+		n31.addChild(n42);
+		
+		Node n32 = new Node (15);
+		
+		Node n22 = new Node (12);
+		n22.addChild(n31);
+		n22.addChild(n32);
+		
+		Node n21 = new Node (8);
+		
+		Node n1 = new Node (11);
+		Node n2 = new Node (12);
+		n1.addChild(n22);
+		n1.addChild(n21);
+		
+		Node root = new Node (10);
+		root.addChild(n1);
+		root.addChild(n2);
+		
+		
+	}
+
+}

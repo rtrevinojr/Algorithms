@@ -1,0 +1,33 @@
+package topcoder;
+
+public class Permutations {
+	
+	
+	
+	public static void perm (String word, String rest) {
+		
+		if (word.equals("")) {
+			System.out.println(rest);
+			return;
+		}
+		
+		for (int i = 0; i < word.length(); i++) {
+			
+			char ch = word.charAt(i);
+			
+			String upWord = word.substring(0, i) + word.substring(i);
+			
+			perm(upWord, rest + String.valueOf(ch));
+		}
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		perm("ABC", "");
+		
+		
+		
+	}
+
+}

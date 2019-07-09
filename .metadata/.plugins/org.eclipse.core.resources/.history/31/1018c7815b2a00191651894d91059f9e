@@ -1,0 +1,61 @@
+package practice;
+
+public class MyTrie {
+
+	
+	public static class Node {
+		
+		public Character letter;
+		public Node [] children;
+		public boolean valid;
+		
+		public Node (Character ch) {
+			letter = ch;
+			children = new Node [26];
+			valid = false;
+		}
+		public Node (Character ch, boolean valid) {
+			this.letter = ch;
+			this.children = new Node [26];
+			this.valid = true;
+		}
+		
+	}
+	
+	public Node root;
+	
+	public MyTrie () {
+		root = new Node (null);
+	}
+	
+	public void insert (String word) {
+		root = insert(word, root, 0);
+	}
+	
+	public Node insert (String word, Node node, int index) {
+		
+		if (index >= word.length()) {
+			return null;
+		}
+		
+		Character letter = word.charAt(index);
+		int ch = letter - 'a';
+		
+		if (index == word.length() - 1) {
+			return new Node (letter, true);
+		}
+		
+		for (int i = 0; i < 26; i++) {
+			Node n = new Node(letter);
+		}
+		
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("MyTrie.java");
+		
+		
+	}
+}

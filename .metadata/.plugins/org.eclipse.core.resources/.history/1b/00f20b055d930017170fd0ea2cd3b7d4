@@ -1,0 +1,48 @@
+package fb;
+
+import java.io.File;
+import java.util.Scanner;
+
+public class MST {
+	
+	
+	public static void main (String [] args) {
+		
+		try {
+			Scanner scan = new Scanner (new File("input.txt"));
+	
+			int q = scan.nextInt();
+			for (int i = 0; i < q; i++) {
+				int n = scan.nextInt();
+				int m = scan.nextInt();
+				DirectedWeightedGraph graph = new DirectedWeightedGraph (n);
+				for (int e = 0; e < m; e++) {
+					int u = scan.nextInt();
+					int v = scan.nextInt();	
+					int w = scan.nextInt();
+					MyDirectedEdge edge = new MyDirectedEdge(u, v, w);
+					MyDirectedEdge edgeR = new MyDirectedEdge(v, u, w);
+					graph.addDirectedEdge(u, v, w);
+					graph.addDirectedEdge(v, u, w);
+				}
+				int s = scan.nextInt();
+				//System.out.println("s = " + s);
+				
+				Dijkstra dijkstra = new Dijkstra(graph, n);
+				dijkstra.performDijkstra(graph, s);
+
+				//dijkstra.printShortestPathArray();
+				dijkstra.printShortestPathArray2(s);
+				System.out.println();
+				//printGraph(graph.adjacencyList);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+}

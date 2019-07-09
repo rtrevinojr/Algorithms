@@ -1,0 +1,135 @@
+package practice;
+
+public class MyTrie {
+
+	
+	public static class Node {
+		
+		public Character letter;
+		public Node [] children;
+		public boolean valid;
+		
+		public Node (Character ch) {
+			letter = ch;
+			children = new Node [26];
+			valid = false;
+		}
+		public Node (Character ch, boolean valid) {
+			this.letter = ch;
+			this.children = new Node [26];
+			this.valid = true;
+		}
+		
+	}
+	
+	public Node root;
+	
+	public MyTrie () {
+		root = new Node (null);
+	}
+	
+	public void insert (String word) {
+		root = insert(word, root, 0);
+	}
+	
+	public Node insert (String word, Node node, int index) {
+		
+		if (index >= word.length()) {
+			return null;
+		}
+		
+		Character letter = word.charAt(index);
+		int ch = letter - 'a';
+		
+		if (index == word.length() - 1) {
+			
+			if (node.children[ch] == null) {
+				Node n = new Node(letter, true);
+				node.children[ch] = n;
+				return n;
+			}
+			else {
+				node.children[ch].valid = true;
+				return node.children[ch];
+			}
+		}
+		
+		if (node.children[ch] == null) {
+			Node n = new Node(letter);
+			node.children[ch] = insert(word, node.children[ch], index + 1);
+			return n;
+		}
+		else {
+			node.children[ch] = insert (word, node.children[ch], index + 1);
+			return node.children[ch];
+		}
+		
+	}
+	
+	public boolean isWord (String word) {
+		
+		return isWord(word, root, 0);
+	}
+	
+	public boolean isWord(String word, Node node, int index) {
+		
+		if (index >= word.length()) {
+			return true;
+		}
+		
+		Character letter = word.charAt(index);
+		int i = letter - 'a';
+		
+		if (index == word.length() - 1) {
+			if (node.children[i] != null) {
+				if (node.children[i].valid) return true;
+				else return false;
+			}
+			else {
+				return false;
+			}
+		}
+		
+		if (node.children[i] != null) {
+			return isWord(word, node.children[i], index + 1);
+		}
+		else {
+			return false;
+		}
+		
+		
+	}
+	
+	
+	public void printDict () {
+		printDict(root, "");
+		
+	}
+	
+	public void printDict(Node node, String word) {
+		
+		if (node == null) {
+			System.out.println(word);
+		}
+		
+		for (int i = 0; i < 26; i++) {
+			Node n = node.children[i];
+			if (n != null) {
+				node = node.children[i];
+				printDict(node, word + node.children[i].letter);
+			}
+			else {
+				printDict(node, word);
+			}
+		}
+		
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("MyTrie.java");
+		
+		
+	}
+}

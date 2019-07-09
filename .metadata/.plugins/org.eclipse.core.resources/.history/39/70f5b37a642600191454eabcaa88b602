@@ -1,0 +1,38 @@
+package sorting;
+
+public class HeapSort {
+	
+	
+	
+	public static void sink (int [] arr, int k, int n) {
+		
+		while (k < n/2) {
+			
+			int j = 2 * k;
+			
+			if (j < n) {
+				if (arr[j] < arr[j+1]) j++;
+				if (arr[k] < arr[j]) break;
+				k = j;
+			}
+		}
+	}
+	
+	private static void sink(Comparable[] pq, int k, int n) {
+        while (2*k <= n) {
+            int j = 2*k;
+            if (j < n && less(pq, j, j+1)) j++;
+            if (!less(pq, k, j)) break;
+            exch(pq, k, j);
+            k = j;
+        }
+    }
+	
+	
+	public static void main (String [] args) {
+		System.out.println("HeapSort.java");
+		
+		
+	}
+
+}

@@ -1,0 +1,13 @@
+package trie;
+
+import java.util.Map;
+
+public class TrieNode {
+	
+	Character letter;
+	
+	Map <Character, TrieNode> children;
+	
+	boolean valid;
+
+}

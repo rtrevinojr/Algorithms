@@ -1,0 +1,93 @@
+package google;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+
+public class Bag <E> implements Iterable <E> {
+	
+	private Node <E> first;
+	private int size;
+	
+	
+	public Bag () {
+		first = null;
+		size = 0;
+	}
+	
+	private static class Node <E> {
+		public E value;
+		public Node<E> next;
+		public Node (E val) {
+			value = val;
+		}
+	}
+	
+	public void add (E item) {
+		Node <E> oldFirst = first;
+		Node <E> newitem = new Node <E> (item);
+		newitem.next = oldFirst;
+		first = newitem;
+		size++;
+	}
+	
+	public boolean isEmpty () {
+		return size == 0;
+	}
+	
+	public int size () {
+		return size;
+	}
+	
+	public Iterator <E> iterator () {
+		return new ListIterator(first);
+	}
+	
+	public class ListIterator <E> implements Iterator<E> {
+		private Node<E> current;
+		
+		public ListIterator (Node <E> first) {
+			current = first;
+		}
+		
+		public boolean hasNext () {
+			return current.next == null;
+		}
+		
+		public void remove () {
+			throw new UnsupportedOperationException ();
+		}
+		
+		public E next () {
+			if (!hasNext()) 
+				throw new NoSuchElementException();
+			else {
+				E item = current.value;
+				current = current.next;
+				return item;
+			}
+		}
+	}
+	
+	public static void main (String [] args) {
+		System.out.println("----- Bag.java -----");
+		Bag <Integer> bag1 = new Bag();
+		bag1.add(new Integer (1));
+		bag1.add(new Integer (2));
+		bag1.add(new Integer (3));
+		bag1.add(new Integer (4));
+		bag1.add(new Integer (5));
+		//bag1.printBag(bag1);
+		Bag.printBag(bag1);
+		
+	}
+	
+	public static void printBag (Bag<E> bag) {
+		System.out.println("Printing Bag values...");
+		System.out.println("Bag size = " + bag.size());
+		for (E item: bag) {
+			System.out.println(item);
+		}
+	}
+	
+}

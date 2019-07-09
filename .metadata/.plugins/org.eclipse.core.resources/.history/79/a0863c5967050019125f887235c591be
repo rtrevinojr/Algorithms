@@ -1,0 +1,25 @@
+package sorting;
+
+public class MergeSortLL {
+	
+	
+	
+	public static class Node {
+		
+		public int data;
+		public Node next;
+		
+		Node (int data) {
+			this.data = data;
+		}
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("LinkedList MergeSort");
+		
+		
+	}
+
+}

@@ -1,0 +1,20 @@
+package google;
+
+public class MyGraph {
+	
+	private Bag<Integer> [] adjList;
+	private final int V;
+	private int E;
+
+	public MyGraph (int V) {
+		this.V = V;
+		this.E = 0;
+		adjList = (Bag<Integer>[]) new Bag[V];
+		for (int v = 0; v < V; v++) {
+			adjList[v] = new Bag<Integer> ();
+		}
+	}
+	
+	
+
+}

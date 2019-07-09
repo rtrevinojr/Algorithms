@@ -1,0 +1,111 @@
+package google;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class LongestIncrease {
+	
+	
+	public Node root;
+	
+	public int maxIncrease;
+	
+	public LongestIncrease (Node root) {
+		this.root = root;
+		this.maxIncrease = 0;
+	}
+	
+	public void longestIncSeq (Node root) {
+		
+		longestIncSeqHelper (root, root.value, 1);
+	}
+	
+	public void longestIncSeqHelper (Node root, int prev, int count) {
+		
+		
+		if (root.children.size() == 0) {
+			if (root.value - prev == 1) {
+				count += 1;
+				if (count > maxIncrease) {
+					maxIncrease = count;
+				}
+			}
+			return;
+		}
+		
+		for (Node node : root.children) {
+			if (node.value - prev == 1) {
+				count += 1;
+				if (count > maxIncrease) {
+					maxIncrease = count;
+				}
+				longestIncSeqHelper (node, node.value, count);
+			}
+			else {
+				count = 1;
+				//System.out.println("Prev = " + prev);
+
+				//System.out.println("Current = " + node.value);
+				longestIncSeqHelper (node, node.value, count);
+			}
+			
+			//longestIncSeqHelper (node, node.value, count);
+				
+		}
+		
+		
+	}
+
+	
+
+
+
+	
+	public static void main (String [] args) {
+		
+		System.out.println("LongestIncrease.java");
+		
+		Node n51 = new Node (15);
+		
+		Node n41 = new Node (16);
+		Node n42 = new Node (14);
+		n42.addChild(n51);
+		
+		Node n31 = new Node (13);
+		n31.addChild(n41);
+		n31.addChild(n42);
+		
+		Node n32 = new Node (15);
+		
+		Node n22 = new Node (12);
+		n22.addChild(n31);
+		n22.addChild(n32);
+		
+		Node n21 = new Node (8);
+		
+		Node l1 = new Node (11);
+		Node r2 = new Node (12);
+		l1.addChild(n22);
+		l1.addChild(n21);
+		
+//		Node r31 = new Node (1);
+//		Node r32 = new Node (14);
+//		Node r21 = new Node (8);
+//		r21.addChild(r31);
+//		r21.addChild(r32);
+//		r2.addChild(r2);
+		
+		Node root = new Node (10);
+		root.addChild(l1);
+		root.addChild(r2);
+		
+		LongestIncrease calcSeq = new LongestIncrease (root);
+		
+		calcSeq.longestIncSeq(root);
+		
+		System.out.println("Result = " + calcSeq.maxIncrease);
+		
+		
+	}
+
+}

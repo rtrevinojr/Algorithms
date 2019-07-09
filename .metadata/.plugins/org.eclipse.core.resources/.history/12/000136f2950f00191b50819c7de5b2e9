@@ -1,0 +1,60 @@
+package Microsoft;
+
+import java.util.*;
+
+
+public class Practice {
+
+	
+	public static class IntPoint {
+		
+		int x;
+		int y;
+		
+		public IntPoint (int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
+	
+	
+	public boolean hasMidPoint (IntPoint [] arr) {
+		
+		HashSet <IntPoint> set = new HashSet <> ();
+		
+		for (IntPoint point : arr) {
+			set.add(point);
+		}
+		
+		for (IntPoint point : arr) {
+			for (IntPoint p : arr) {
+				//if (arr.contains())
+			}
+		}
+		
+	}
+	
+	public void test (IntPoint [] arr) {
+		
+		HashSet <IntPoint> set = new HashSet <> ();
+		
+		HashMap <IntPoint, String> map = new HashMap <> ();
+		
+		IntPoint point = new IntPoint (1, 2);
+		
+		set.add(point);
+		set.add(new IntPoint (1, 2));
+		
+		boolean present = set.contains(new IntPoint(1, 2));
+		
+		System.out.println("Hashset contains " + present);
+	}
+	
+	
+	public static void main (String [] args) {
+		
+		System.out.println("Practice.java");
+		
+		
+	}
+}

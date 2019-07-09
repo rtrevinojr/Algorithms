@@ -1,0 +1,65 @@
+package sorting;
+
+public class Heapify {
+	
+	
+	public static void sort (int [] arr) {
+		
+		int n = arr.length / 2;
+		
+		for (int i = n; i >= 1; i--) {
+			minHeapify (arr, i, arr.length);
+		}
+		
+		printArray(arr);
+		
+	}
+	
+	
+	public static void minHeapify (int [] arr, int k, int n)	{
+		
+		int left = 2 * k + 1;
+		int right = 2 * k + 2;
+		
+		int current = k;
+		if (right < n && arr[right] < arr[left]) {
+			current = right;
+		}
+		else if (left < n && arr[left] < arr[current]) {
+			current = left;
+		}
+		
+		if (current != k) {
+			swap (arr, current, n--);
+			minHeapify (arr, current, n);
+		}
+		
+	}
+	
+	public static void swap (int [] arr, int i, int j) {
+		int tmp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tmp;
+	}
+	
+	public static void printArray (int [] arr) {
+		
+		for (int i : arr) System.out.print(arr[i] + " ");
+		System.out.println();
+	}
+	
+	public static void main(String [] args) {
+		
+		System.out.println("Heapify.java");
+		
+		int [] arr = {3, 9, 2, 7, 1, 6, 8};
+		
+		sort (arr);
+		
+		printArray(arr);
+		
+		
+		
+	}
+
+}
